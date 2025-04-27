@@ -1,0 +1,36 @@
+CREATE TABLE genero (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL
+);
+CREATE TABLE seriado (
+    id SERIAL PRIMARY KEY,
+    titulo VARCHAR(100) NOT NULL,
+    temporadas INT NOT NULL,
+    nota_imdb DECIMAL(3,1),
+    genero_id INT,
+    FOREIGN KEY (genero_id) REFERENCES genero(id)
+);
+INSERT INTO genero (nome) VALUES 
+('Drama'),
+('Comédia'),
+('Ficção Científica'),
+('Terror'),
+('Documentário');
+INSERT INTO seriado (titulo, temporadas, nota_imdb, genero_id) VALUES
+('Breaking Bad', 5, 9.5, 1),
+('The Office', 9, 8.9, 2),
+('Stranger Things', 5, 8.7, 3),
+('The Haunting of Hill House', 1, 8.6, 4),
+('Planet Earth', 1, 9.4, 5),
+('Friends', 10, 8.9, 2),
+('Black Mirror', 6, 8.7, 3);
+
+/*mostrar apenas séries de comédia*/
+
+SELECT 
+    seriado.titulo, 
+    seriado.temporadas, 
+    seriado.nota_imdb
+FROM seriado
+INNER JOIN genero ON seriado.genero_id = genero.id
+WHERE genero.nome = 'Comédia';
