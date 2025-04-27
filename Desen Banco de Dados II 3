@@ -1,0 +1,44 @@
+1. Confidencialidade
+
+Objetivo: Garantir que apenas pessoas autorizadas possam acessar as informações.
+
+Como aplicar no banco:
+
+Controle de acesso: criar usuários com permissões específicas (quem pode ler, alterar ou excluir dados).
+
+Criptografia: proteger dados sensíveis, como CPF, cartões de crédito e senhas.
+
+Autenticação forte: exigir senhas seguras, autenticação de dois fatores, etc.
+
+Exemplo prático: só o gerente da loja pode ver o faturamento total, não todos os funcionários.
+
+2. Integridade
+
+Objetivo: Garantir que os dados estejam corretos, íntegros e não sejam alterados indevidamente.
+
+Como aplicar no banco:
+
+Validação de dados: usar regras (constraints) como NOT NULL, CHECK, FOREIGN KEY.
+
+Triggers e Procedures: para garantir que certos processos automáticos mantenham a integridade dos dados.
+
+Backups regulares: para restaurar os dados em caso de corrupção ou falha.
+
+Exemplo prático: não permitir que seja cadastrado um cliente sem nome ou uma venda com valor negativo.
+
+
+3. Disponibilidade
+
+
+Objetivo: Garantir que o sistema esteja sempre disponível para quem precisa acessar os dados, de forma rápida e segura.
+
+Como aplicar no banco:
+
+Servidores confiáveis e de alta disponibilidade (com redundância).
+
+Planos de recuperação de desastres: como backups em locais diferentes.
+
+Monitoramento de performance: identificar e corrigir falhas rapidamente.
+
+Exemplo prático: mesmo que um servidor caia, outro servidor assume para a loja continuar vendendo normalmente.
+
