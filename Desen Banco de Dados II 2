@@ -17,3 +17,32 @@ END;
 $$;
 CALL gerar_relatorio_diario();
 SELECT * FROM relatorio_vendas_diario;
+
+/* criando função para contar clientes por data */
+
+CREATE TABLE clientes (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100),
+    data_cadastro DATE DEFAULT CURRENT_DATE
+);
+CREATE OR REPLACE FUNCTION contar_clientes_por_dia(data_consulta DATE)
+RETURNS INT
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    total_clientes INT;
+BEGIN
+    SELECT COUNT(*) INTO total_clientes
+    FROM clientes
+    WHERE data_cadastro = data_consulta;
+
+    RETURN total_clientes;
+END;
+$$;
+INSERT INTO clientes (nome, data_cadastro) VALUES
+('João', '2025-04-26'),
+('Maria', '2025-04-26'),
+('Ana', '2025-04-27'),
+('Pedro', '2025-04-27'),
+('Paulo', '2025-04-27');
+SELECT contar_clientes_por_dia('2025-04-26');
