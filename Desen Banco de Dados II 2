@@ -1,0 +1,19 @@
+CREATE TABLE relatorio_vendas_diario (
+    id SERIAL PRIMARY KEY,
+    data_venda DATE,
+    total_vendido INT
+);
+CREATE OR REPLACE PROCEDURE gerar_relatorio_diario()
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    DELETE FROM relatorio_vendas_diario;
+    INSERT INTO relatorio_vendas_diario (data_venda, total_vendido)
+    SELECT data_venda, SUM(quantidade)
+    FROM vendas
+    GROUP BY data_venda
+    ORDER BY data_venda;
+END;
+$$;
+CALL gerar_relatorio_diario();
+SELECT * FROM relatorio_vendas_diario;
